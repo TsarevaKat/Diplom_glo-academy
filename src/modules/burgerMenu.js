@@ -31,9 +31,7 @@ const mobileMenu = () => {
     let href = btn.getAttribute('href'),
       blockForScroll = document.querySelector(href),
       topBlock = blockForScroll.offsetTop - menuHeight;
-    console.log('topBlock: ', topBlock);
-    console.log('window.pageXOffset: ', window.pageYOffset);
-
+      
     const scrollDown = () => {
       window.scrollBy(0, 50);
       if (window.pageYOffset < topBlock) {

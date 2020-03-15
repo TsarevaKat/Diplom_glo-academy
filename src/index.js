@@ -12,6 +12,7 @@ import popup from './modules/popup';
 import sliders from './modules/sliders';
 import btnUp from './modules/btnUp';
 import mobileMenu from './modules/burgerMenu';
+import calc from './modules/calc';
 
 // выбор клуба
 chooseClub();
@@ -27,3 +28,6 @@ btnUp();
 
 // мобильное меню
 mobileMenu();
+
+// калькулятор
+calc();
