@@ -21,14 +21,15 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
-    "gulp": "^4.0.2",
-    "gulp-cli": "^2.2.0",
-    "gulp-util": "^3.0.8",
     "element-closest": "^3.0.2",
     "es6-promise": "^4.2.8",
     "fetch-polyfill": "^0.8.2",
     "formdata-polyfill": "^3.0.19",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.2.0",
+    "gulp-util": "^3.0.8",
     "nodelist-foreach-polyfill": "^1.2.0",
+    "remove-polyfill": "^1.0.0",
     "vinyl-ftp": "^0.6.1"
   }
 }

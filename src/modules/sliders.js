@@ -58,7 +58,6 @@ const startSlide = (slider, typeBlock, time = 5000) => {
   slider.addEventListener('click', (e) => {
     let target = e.target;
 
-    console.log('target: ', target);
     if (!(target.closest('.dot') || target.closest('.slider-arrow'))) {
       return;
     }
@@ -148,26 +147,70 @@ const dotsAdd = (slider) => {
   slider.appendChild(dots);
 };
 
-class SiderCar {
-  constructor(){
+const sliderCarusel = (slider) => {
+  let curSlide = 0;
+  const slide = slider.querySelectorAll('.slide'),
+    sliderWrap = document.createElement('div');
 
-  }
+  sliderWrap.classList.add('slider-wrap');
+  sliderWrap.style.cssText = `
+    display:flex;
+    transition: 0.5s;
+  `;
 
-  init(){
+  slider.style.cssText = `
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 0;
+  `;
+  slider.appendChild(sliderWrap);
 
-  }
-}
+  slide.forEach((item) => {
+    item.style.cssText =`
+      transition: 0.5s;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: calc(20% - 12px);`;
+      
+    sliderWrap.appendChild(item);
+  });
+
+  slider.addEventListener('click', (e) => {
+    let target = e.target;
+
+    if (!target.closest('.slider-arrow')) {
+      return;
+    }
+
+    if (target.closest('.next')) {
+      if (curSlide < slide.length - 5) {
+        curSlide++;
+        sliderWrap.style.transform = `translateX(-${20 * curSlide}%)`;
+      }
+    } else if (target.closest('.prev')) {
+
+      if (curSlide > 0) {
+        curSlide--;
+        sliderWrap.style.transform = `translateX(-${20 * curSlide}%)`;
+      }
+
+    }
+  });
+};
 
 const sliders = () => {
   const sliderMain = document.querySelector('.main-slider'),
-    sliderGalley = document.querySelector('.gallery-slider'), 
+    sliderGalley = document.querySelector('.gallery-slider'),
     sliderServices = document.querySelector('.services-slider');
 
   startSlide(sliderMain, 'flex');
   addArrow(sliderGalley);
   dotsAdd(sliderGalley);
   startSlide(sliderGalley, 'block');
-  
+
+  addArrow(sliderServices);
+  sliderCarusel(sliderServices);
 };
 
 export default sliders;

@@ -1,11 +1,11 @@
 'use strict';
-// import "@babel/polyfill";
-// import 'nodelist-foreach-polyfill';
-// import elementClosect from 'element-closest';
-// elementClosect(window);
-// import 'formdata-polyfill';
-// import 'es6-promise';
-// import 'fetch-polyfill';
+import '@babel/polyfill';
+import 'nodelist-foreach-polyfill';
+import 'remove-polyfill';
+import elementClosect from 'element-closest';
+elementClosect(window);
+import 'formdata-polyfill';
+import 'fetch-polyfill';
 
 import chooseClub from './modules/chooseClub'; 
 import popup from './modules/popup';
