@@ -11,6 +11,12 @@ const forms = () => {
 
     const checkError = document.createElement('div');
     checkError.classList.add('error');
+    checkError.style.cssText = `
+      margin-top: 5px;
+      font-weight: 700;
+      color: #ff0000;
+    `;
+
     form.appendChild(checkError);
 
     form.addEventListener('input', (e) => {
@@ -58,13 +64,19 @@ const forms = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: body
+        body: JSON.stringify(body)
       });
     };
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const formData = new FormData(form);
+
+      let body = {};
+
+      formData.forEach((val, key) => {
+        body[key] = val;
+      });
 
       const popupSend = () => {
         const errorMessage = 'Что-то пошло не так...',
@@ -73,11 +85,21 @@ const forms = () => {
 
         const statusMessage = document.createElement('div');
         statusMessage.classList.add('status');
+        statusMessage.style.cssText = `
+          height: 100%;
+          font-size: 20px;
+          font-weight: 700;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `;
         statusMessage.textContent = loadMessage;
 
         form.style.display = 'none';
         form.closest('.form-content').appendChild(statusMessage);
-        postData(formData)
+
+        postData(body)
           .then(
             (response) => {
               if (response.status !== 200) {
@@ -99,7 +121,7 @@ const forms = () => {
         const thanks = document.getElementById('thanks'),
           thanksText = thanks.querySelector('p');
 
-        postData(formData)
+        postData(body)
           .then(
             (response) => {
               if (response.status !== 200) {
@@ -135,11 +157,11 @@ const forms = () => {
         }
       } else {
         const club = form.querySelectorAll('.club input');
-        let check;
+        let check = 1;
 
         club.forEach((item) => {
-          if (!item.check) {
-            check = 1;
+          if (item.checked) {
+            check = 0;
             return;
           }
         });
@@ -148,11 +170,7 @@ const forms = () => {
           checkError.textContent = 'необходимо выбрать клуб';
         } else {
           checkError.textContent = '';
-          if (e.target.closest('.popup')) {
-            popupSend();
-          } else {
-            formSend();
-          }
+          formSend();
         }
       }
     });
