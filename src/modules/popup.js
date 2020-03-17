@@ -1,6 +1,6 @@
 const popup = () => {
   const popupLink = document.querySelector('.open-popup'),
-    btnPopupCallBack = document.querySelectorAll('.callback-btn'),
+    btnPopupCallBack = document.querySelectorAll('.head-main .callback-btn'),
     gift = document.querySelector('.fixed-gift'),
     popup = document.querySelectorAll('.popup');
 
@@ -8,8 +8,12 @@ const popup = () => {
     e.preventDefault();
     let target = e.target;
     let href = target.dataset.popup,
-      popupNow = document.querySelector(href);
+      popupNow = document.querySelector(href), popupForm = popupNow.querySelector('form'), status = popupNow.querySelector('.status');
     popupNow.style.display = 'block';
+    popupForm.style.display = 'block';
+    if (status) {
+      status.remove();
+    }
   };
 
   const popupClose = (e) => {

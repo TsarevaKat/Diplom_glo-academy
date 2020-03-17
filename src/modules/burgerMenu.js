@@ -25,13 +25,12 @@ const mobileMenu = () => {
       topMenu.style.position = 'static';
     }
   });
-
   // прокрутка по странице
   const scrollBlock = (btn) => {
     let href = btn.getAttribute('href'),
       blockForScroll = document.querySelector(href),
       topBlock = blockForScroll.offsetTop - menuHeight;
-      
+
     const scrollDown = () => {
       window.scrollBy(0, 50);
       if (window.pageYOffset < topBlock) {
@@ -57,6 +56,19 @@ const mobileMenu = () => {
     e.preventDefault();
     scrollBlock(e.target);
   }));
+
+  const showBurger = () => {
+    if (screen.width < 768) {
+      burgerBtn.classList.remove('hidden-large');
+    } else if (!burgerBtn.matches('.hidden-large')) {
+      burgerBtn.classList.add('hidden-large');
+    }
+  };
+  
+  showBurger();
+
+  window.addEventListener('resize', showBurger);
+
 };
 
 export default mobileMenu;
