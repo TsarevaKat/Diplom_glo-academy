@@ -9,6 +9,10 @@ const forms = () => {
     let index = 0;
     const formInputs = form.querySelectorAll('input');
 
+    const checkError = document.createElement('div');
+    checkError.classList.add('error');
+    form.appendChild(checkError);
+
     form.addEventListener('input', (e) => {
       const target = e.target;
       if (target.matches('input[type="text"]')) {
@@ -60,18 +64,6 @@ const forms = () => {
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-
-      const check = form.querySelector('.personal-data input'),
-        checkError = document.createElement('div');
-      checkError.classList.add('error');
-
-      // if (!check.checked) {
-      //   checkError.textContent = 'необходимо подтвердить согласие';
-      // } else {
-      //   checkError.textContent = '';
-      // }
-      form.appendChild(checkError);
-
       const formData = new FormData(form);
 
       const popupSend = () => {
@@ -125,12 +117,43 @@ const forms = () => {
               thanksText.innerHTML = `Что-то пошло не так`;
             }
           );
-      }
+      };
 
-      if (e.target.closest('.popup')) {
-        popupSend();
+      if (!form.matches('#footer_form')) {
+        const agree = form.querySelector('.personal-data');
+        let check = agree.querySelector('input');
+
+        if (!check.checked) {
+          checkError.textContent = 'необходимо подтвердить согласие';
+        } else {
+          checkError.textContent = '';
+          if (e.target.closest('.popup')) {
+            popupSend();
+          } else {
+            formSend();
+          }
+        }
       } else {
-        formSend();
+        const club = form.querySelectorAll('.club input');
+        let check;
+
+        club.forEach((item) => {
+          if (!item.check) {
+            check = 1;
+            return;
+          }
+        });
+
+        if (check === 1) {
+          checkError.textContent = 'необходимо выбрать клуб';
+        } else {
+          checkError.textContent = '';
+          if (e.target.closest('.popup')) {
+            popupSend();
+          } else {
+            formSend();
+          }
+        }
       }
     });
   };

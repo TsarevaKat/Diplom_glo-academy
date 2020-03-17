@@ -148,16 +148,26 @@ const dotsAdd = (slider) => {
   slider.appendChild(dots);
 };
 
+class SiderCar {
+  constructor(){
+
+  }
+
+  init(){
+
+  }
+}
 
 const sliders = () => {
   const sliderMain = document.querySelector('.main-slider'),
-    sliderGalley = document.querySelector('.gallery-slider');
+    sliderGalley = document.querySelector('.gallery-slider'), 
+    sliderServices = document.querySelector('.services-slider');
 
   startSlide(sliderMain, 'flex');
   addArrow(sliderGalley);
   dotsAdd(sliderGalley);
   startSlide(sliderGalley, 'block');
-
+  
 };
 
 export default sliders;
