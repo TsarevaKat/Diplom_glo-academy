@@ -44,8 +44,6 @@ const forms = () => {
 
         index++;
 
-        console.log('leng: ', leng);
-        console.log('target.value: ', target.value);
       }
     });
 
@@ -67,11 +65,11 @@ const forms = () => {
         checkError = document.createElement('div');
       checkError.classList.add('error');
 
-      if (check.length && !check.checked) {
-        checkError.textContent = 'необходимо подтвердить согласие';
-      } else {
-        checkError.textContent = '';
-      }
+      // if (!check.checked) {
+      //   checkError.textContent = 'необходимо подтвердить согласие';
+      // } else {
+      //   checkError.textContent = '';
+      // }
       form.appendChild(checkError);
 
       const formData = new FormData(form);

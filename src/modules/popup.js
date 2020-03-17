@@ -32,12 +32,14 @@ const popup = () => {
     item.addEventListener('click', popupClose);
   });
 
-  gift.addEventListener('click', () => {
-    let href = '#gift',
-      popupNow = document.querySelector(href);
-    popupNow.style.display = 'block';
-    gift.remove();
-  });
+  if (gift) {
+    gift.addEventListener('click', () => {
+      let href = '#gift',
+        popupNow = document.querySelector(href);
+      popupNow.style.display = 'block';
+      gift.remove();
+    });
+  }
 };
 
 export default popup;
