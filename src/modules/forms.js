@@ -140,7 +140,7 @@ const forms = () => {
           );
 
         formInputs.forEach((item) => {
-          if (!(item.closest('.time') || item.closest('.cards-types'))) {
+          if (!(item.matches('[type="checkbox"]') || item.matches('[type="radio"]') || item.matches('[type="hidden"]'))) {
             item.value = '';
           }
         });
