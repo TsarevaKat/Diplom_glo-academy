@@ -22,7 +22,7 @@ const forms = () => {
     form.addEventListener('input', (e) => {
       const target = e.target;
       if (target.matches('input[type="text"]')) {
-        target.value = target.value.replace(/[^а-я!]/gi, '');
+        target.value = target.value.replace(/[^а-яё\s]/gi, '');
       } else if (target.matches('input[type="tel"]')) {
         const leng = target.value.length;
         target.value = target.value.replace(/[^\+\d)(-]/, '');
