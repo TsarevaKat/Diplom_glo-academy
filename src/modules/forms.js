@@ -106,15 +106,16 @@ const forms = () => {
                 throw new Error('status network not 200');
               }
               statusMessage.textContent = successMessage;
-              formInputs.forEach((item) => {
-                item.value = '';
-              });
             })
           .catch(
             () => {
               statusMessage.textContent = errorMessage;
             }
           );
+
+        formInputs.forEach((item) => {
+          item.value = '';
+        });
       };
 
       const formSend = () => {
@@ -129,9 +130,7 @@ const forms = () => {
               }
               thanks.style.display = 'block';
               thanksText.innerHTML = `Ваша заявка отправлена. <br> Мы свяжемся с вами в ближайшее время`;
-              formInputs.forEach((item) => {
-                item.value = '';
-              });
+
             })
           .catch(
             () => {
@@ -139,6 +138,12 @@ const forms = () => {
               thanksText.innerHTML = `Что-то пошло не так`;
             }
           );
+
+        formInputs.forEach((item) => {
+          if (!(item.closest('.time') || item.closest('.cards-types'))) {
+            item.value = '';
+          }
+        });
       };
 
       if (!form.matches('#footer_form')) {
