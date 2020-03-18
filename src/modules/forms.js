@@ -21,39 +21,12 @@ const forms = () => {
 
     form.addEventListener('input', (e) => {
       const target = e.target;
-      if (target.matches('input[type="text"]')) {
+      if (target.matches('input[type="text"]') && !target.closest('.price-message')) {
         target.value = target.value.replace(/[^а-яё\s]/gi, '');
+      } else if (target.closest('.price-message')) {
+        target.value = target.value.replace(/[^а-яё\s\d]/gi, '');
       } else if (target.matches('input[type="tel"]')) {
-        const leng = target.value.length;
-        target.value = target.value.replace(/[^\+\d)(-]/, '');
-
-        if (leng < index) {
-          index--;
-          return;
-        }
-
-        if (leng === 1) {
-          target.value = '+' + target.value + '(';
-        }
-
-        if (leng === 6) {
-          target.value = target.value + ")";
-        }
-
-        if (leng === 10) {
-          target.value = target.value + "-";
-        }
-
-        if (leng === 13) {
-          target.value = target.value + "-";
-        }
-
-        if (leng > 16) {
-          target.value = target.value.substring(0, target.value.length - 1);
-        }
-
-        index++;
-
+        target.value = target.value.replace(/[^\+\d]/, '').substr(0, 12);
       }
     });
 
